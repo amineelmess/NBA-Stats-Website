@@ -33,7 +33,6 @@ def main():
 
     if args.stat:
         player_data = db.get_player_stats_db(args.stat)
-
         if player_data and len(player_data) > 0:
             player = player_data[0]
             print(f"Statistics for {player[0]}:")
@@ -48,7 +47,6 @@ def main():
 
     if args.player:
         team_players = db.get_players_by_team(args.player)
-
         if team_players and len(team_players) > 0:
             print(f"Players on {args.player}:")
             for player in team_players:
