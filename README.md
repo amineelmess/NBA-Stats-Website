@@ -127,3 +127,8 @@ Our website implements the following usability principles:
 - Dark text on light blue backgrounds for content sections
 - Black text on white backgrounds for input fields and dropdowns
 - All changes follow WCAG AA contrast standards for accessibility
+
+## Team Members
+- Amine El Messaoudi
+- Jeremy Gautama
+- Ngelek Thayai
