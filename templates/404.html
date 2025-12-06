@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='datastyle.css') }}">
+    <title>404 - Page Not Found</title>
+</head>
+<body>
+    <header>
+        <h1>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Basketball.png"
+                 alt="Basketball Logo">
+            <span>NBA STATS WEBSITE</span>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('homepage') }}">Home</a></li>
+                    <li><a href="{{ url_for('top_players_page') }}">Top Players</a></li>
+                    <li><a href="{{ url_for('teams_page') }}">Teams</a></li>
+                    <li><a href="{{ url_for('about_page') }}">About</a></li>
+                </ul>
+            </nav>
+        </h1>
+    </header>
+
+    <main>
+        <div class="main-section">
+            <h2>404 - Page Not Found</h2>
+            <div class="error-message">
+                <p>The page you're looking for doesn't exist.</p>
+            </div>
+
+            <div class="content" style="max-width: 800px; margin: 40px auto; text-align: left;">
+                <h3>How to use this website:</h3>
+                <ul style="font-size: 1.1em; line-height: 1.8;">
+                    <li>
+                        <strong>/stat/&lt;player_name&gt;</strong> - Get statistics for a specific player
+                        <br><em>Example: <a href="/stat/LeBron-James">/stat/LeBron-James</a></em>
+                    </li>
+                    <li style="margin-top: 15px;">
+                        <strong>/teams/&lt;team_name&gt;</strong> - Get all players for a specific team
+                        <br><em>Example: <a href="/teams/LAL">/teams/LAL</a></em>
+                    </li>
+                    <li style="margin-top: 15px;">
+                        <strong>/top-players</strong> - View the top scoring players
+                        <br><em>Example: <a href="/top-players">/top-players</a></em>
+                    </li>
+                    <li style="margin-top: 15px;">
+                        <strong>/</strong> - Return to homepage
+                        <br><em>Example: <a href="/">Home</a></em>
+                    </li>
+                </ul>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="/" style="font-size: 1.1em; color: #0a7a0a; text-decoration: none; font-weight: bold; padding: 10px 20px; border: 2px solid #0a7a0a; border-radius: 5px; display: inline-block;">
+                    ← Back to Home
+                </a>
+            </div>
+        </div>
+    </main>
+    <script src="{{ url_for('static', filename='navigation.js') }}"></script>
+</body>
+</html>

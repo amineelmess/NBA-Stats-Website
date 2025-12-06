@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top Players - NBA STATS</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='datastyle.css') }}">
+    <script src="{{ url_for('static', filename='navigation.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='autocomplete.js') }}"></script>
+</head>
+<body>
+<header>
+<h1>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Basketball.png" alt="Basketball Logo">
+  <span>NBA STATS WEBSITE</span>
+  <nav>
+    <ul>
+    <li><a href="{{ url_for('homepage') }}">Home</a></li>
+    <li><a href="{{ url_for('top_players_page') }}">Top Players</a></li>
+    <li><a href="{{ url_for('teams_page') }}">Teams</a></li>
+    <li><a href="{{ url_for('about_page') }}">About</a></li>
+    </ul>
+  </nav>
+    <form class="search-bar" action="/" method="get" role="search">
+  <label for="player-search">Player name:</label>
+  <div class="autocomplete-container">
+    <input id="player-search" type="text" name="name" placeholder="Search player..." value="{{ searched_player if searched_player else '' }}" required aria-describedby="search-help" autocomplete="off">
+    <div id="autocomplete-dropdown" class="autocomplete-dropdown"></div>
+  </div>
+  <span id="search-help" class="sr-only">Enter a player's full name to search for their statistics</span>
+  <button type="submit">Search</button>
+</form>
+</h1>
+</header>
+
+<main>
+<div class="content">
+  <div class="top-players-banner">
+    <h2>Top Players for {{ current_season }}</h2>
+    <p class="banner-subtitle">Based on total points scored</p>
+  </div>
+
+  <div class="season-select">
+    <form method="get" action="{{ url_for('top_players_page') }}">
+      <label for="season-select">Choose a season:</label>
+      <select id="season-select" name="season" onchange="this.form.submit()">
+        {% for season in seasons %}
+        <option value="{{ season }}" {% if season == current_season %}selected{% endif %}>
+          {{ season }}
+        </option>
+        {% endfor %}
+      </select>
+      <noscript><button type="submit">Update</button></noscript>
+    </form>
+  </div>
+
+  <table class="simple" role="table" aria-label="Top NBA players statistics">
+  <thead>
+  <tr>
+    <th scope="col">Player</th>
+    <th scope="col">Position</th>
+    <th scope="col">Team</th>
+    <th scope="col">Games Played</th>
+    <th scope="col">Average Points Per Game</th>
+    <th scope="col">Average Assists Per Game</th>
+    <th scope="col">Average Rebounds Per Game</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for player in players %}
+  <tr>
+      <th scope="row">{{ player.Player }}</th>
+      <td><span class="position-abbr">{{ player.Pos }}</span></td>
+      <td><span class="team-abbr">{{ player.Tm }}</span></td>
+      <td>{{ player.G }}</td>
+      <td>{{ player.PTS }}</td>
+      <td>{{ player.AST }}</td>
+      <td>{{ player.TRB }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+</main>
+</body>
+</html>

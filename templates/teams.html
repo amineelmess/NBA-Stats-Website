@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='datastyle.css') }}">
+    <script src="{{ url_for('static', filename='navigation.js') }}" defer></script>
+    <title>Teams - NBA STATS</title>
+</head>
+<body>
+    <header>
+        <h1>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Basketball.png"
+                 alt="Basketball Logo">
+            <span>NBA STATS WEBSITE</span>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('homepage') }}">Home</a></li>
+                    <li><a href="{{ url_for('top_players_page') }}">Top Players</a></li>
+                    <li><a href="{{ url_for('teams_page') }}">Teams</a></li>
+                    <li><a href="{{ url_for('about_page') }}">About</a></li>
+                </ul>
+            </nav>
+            <form class="search-bar" action="/" method="get" role="search">
+                <label for="player-search">Player name:</label>
+                <div class="autocomplete-container">
+                    <input id="player-search" type="text" name="name" placeholder="Search player..." value="" required aria-describedby="search-help" autocomplete="off">
+                    <div id="autocomplete-dropdown" class="autocomplete-dropdown"></div>
+                </div>
+                <span id="search-help" class="sr-only">Enter a player's full name to search for their statistics</span>
+                <button type="submit">Search</button>
+            </form>
+        </h1>
+    </header>
+
+    <main>
+        <div class="main-section">
+            <h2>NBA Teams</h2>
+            <p>Click on a team to view their players</p>
+
+            <div class="teams-grid">
+                {% for team in teams %}
+                <a href="{{ url_for('team_roster', team_name=team.abbr) }}" class="team-box" aria-label="View {{ team.name }} players">
+                    <div class="team-box-content">
+                        <img src="{{ url_for('static', filename='logos/' + team.name.lower().replace(' ', '_').replace("'", '') + '_logo.webp') }}" alt="{{ team.name }} Logo" class="team-logo">
+                        <h3>{{ team.abbr }}</h3>
+                        <p class="team-full-name">{{ team.name }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='autocomplete.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='datastyle.css') }}">
+<script src="{{ url_for('static', filename='autocomplete.js') }}"></script>
+<title>NBA STATS WEBSITE</title>
+</head>
+<!-- The body consists of the visible parts of the web page. -->
+<body>
+<header>
+<h1>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Basketball.png" 
+       alt="Basketball Logo">
+  <span>NBA STATS WEBSITE</span>
+<nav>
+  <ul>
+    <li><a href="{{ url_for('homepage') }}">Home</a></li>
+    <li><a href="{{ url_for('top_players_page') }}">Top Players</a></li>
+    <li><a href="{{ url_for('teams_page') }}">Teams</a></li>
+    <li><a href="{{ url_for('about_page') }}">About</a></li>
+  </ul>
+</nav>
+      <form class="search-bar" action="/" method="get" role="search">
+      <label for="player-search">Player name:</label>
+      <div class="autocomplete-container">
+        <input id="player-search" type="text" name="name" placeholder="Search player..." value="{{ searched_player if searched_player else ''}}" required aria-describedby="search-help" autocomplete="off">
+        <div id="autocomplete-dropdown" class="autocomplete-dropdown"></div>
+      </div>
+      <span id="search-help" class="sr-only">Enter a player's full name to search for their statistics</span>
+      <button type="submit">Search</button>
+    </form>
+</h1>
+</header>
+
+<main>
+
+<div class="main-section">
+  {% if searched_player %}
+    {% if player_found %}
+      <h2>{{ searched_player }} ({{ current_season }})</h2>
+    {% else %}
+      <div class="error-message">
+        <h2>Player Not Found</h2>
+        <p>Player "{{ searched_player }}" not found in {{ current_season }} season data.</p>
+        <p>Please try searching for another player.</p>
+      </div>
+    {% endif %}
+  {% else %}
+    <h2>Featured Player ({{ current_season }})</h2>
+  {% endif %}
+
+ {% if not searched_player or player_found %}
+  <div class="player-container">
+    <div class="player-image">
+      {% if featured_player.Player == "Devin Booker" %}
+        <img src="{{ url_for('static', filename='images/booker.png.avif') }}" class="player-photo" alt="Devin Booker">
+      {% elif featured_player.Player == "Jalen Brunson" %}
+        <img src="{{ url_for('static', filename='images/brunson.png.webp') }}" class="player-photo" alt="Jalen Brunson">
+      {% elif featured_player.Player == "Stephen Curry" %}
+        <img src="{{ url_for('static', filename='images/curry.png.avif') }}" class="player-photo" alt="Stephen Curry">
+      {% elif featured_player.Player == "Kevin Durant" %}
+        <img src="{{ url_for('static', filename='images/durant.png.webp') }}" class="player-photo" alt="Kevin Durant">
+      {% elif featured_player.Player == "Joel Embiid" %}
+        <img src="{{ url_for('static', filename='images/embiid.png.avif') }}" class="player-photo" alt="Joel Embiid">
+      {% elif featured_player.Player == "De'Aaron Fox" %}
+        <img src="{{ url_for('static', filename='images/fox.png.avif') }}" class="player-photo" alt="De'Aaron Fox">
+      {% elif featured_player.Player == "Giannis Antetokounmpo" %}
+        <img src="{{ url_for('static', filename='images/giannis.png.avif') }}" class="player-photo" alt="Giannis Antetokounmpo">
+      {% elif featured_player.Player == "Nikola Jokic" %}
+        <img src="{{ url_for('static', filename='images/jokic.png.avif') }}" class="player-photo" alt="Nikola Jokić">
+      {% elif featured_player.Player == "LeBron James" %}
+        <img src="{{ url_for('static', filename='images/lebron.png.avif') }}" class="player-photo" alt="LeBron James">
+      {% elif featured_player.Player == "Damian Lillard" %}
+        <img src="{{ url_for('static', filename='images/lillard.png.webp') }}" class="player-photo" alt="Damian Lillard">
+      {% elif featured_player.Player == "Luka Dončić" %}
+        <img src="{{ url_for('static', filename='images/luka.png.avif') }}" class="player-photo" alt="Luka Doncic">
+      {% elif featured_player.Player == "Donovan Mitchell" %}
+        <img src="{{ url_for('static', filename='images/mitchell.png.avif') }}" cass="player-photo" alt="Donovan Mitchell">
+      {% elif featured_player.Player == "Shai Gilgeous-Alexander" %}
+        <img src="{{ url_for('static', filename='images/shai.png.webp') }}" class="player-photo" alt="Shai Gilgeous-Alexander">
+      {% elif featured_player.Player == "Jayson Tatum" %}
+        <img src="{{ url_for('static', filename='images/tatum.png.webp') }}" class="player-photo" alt="Jayson Tatum">
+      {% else %}
+        <!-- Show team logo for players without individual photos -->
+        {% if featured_player.Tm == "ATL" %}
+          <img src="{{ url_for('static', filename='logos/atlanta_hawks_logo.webp') }}" class="player-photo" alt="Atlanta Hawks Logo">
+        {% elif featured_player.Tm == "BOS" %}
+          <img src="{{ url_for('static', filename='logos/boston_celtics_logo.webp') }}" class="player-photo" alt="Boston Celtics Logo">
+        {% elif featured_player.Tm == "BRK" %}
+          <img src="{{ url_for('static', filename='logos/brooklyn_nets_logo.webp') }}" class="player-photo" alt="Brooklyn Nets Logo">
+        {% elif featured_player.Tm == "CHO" %}
+          <img src="{{ url_for('static', filename='logos/charlotte_hornets_logo.webp') }}" class="player-photo" alt="Charlotte Hornets Logo">
+        {% elif featured_player.Tm == "CHI" %}
+          <img src="{{ url_for('static', filename='logos/chicago_bulls_logo.webp') }}" class="player-photo" alt="Chicago Bulls Logo">
+        {% elif featured_player.Tm == "CLE" %}
+          <img src="{{ url_for('static', filename='logos/cleveland_cavaliers_logo.webp') }}" class="player-photo" alt="Cleveland Cavaliers Logo">
+        {% elif featured_player.Tm == "DAL" %}
+          <img src="{{ url_for('static', filename='logos/dallas_mavericks_logo.webp') }}" class="player-photo" alt="Dallas Mavericks Logo">
+        {% elif featured_player.Tm == "DEN" %}
+          <img src="{{ url_for('static', filename='logos/denver_nuggets_logo.webp') }}" class="player-photo" alt="Denver Nuggets Logo">
+        {% elif featured_player.Tm == "DET" %}
+          <img src="{{ url_for('static', filename='logos/detroit_pistons_logo.webp') }}" class="player-photo" alt="Detroit Pistons Logo">
+        {% elif featured_player.Tm == "GSW" %}
+          <img src="{{ url_for('static', filename='logos/golden_state_warriors_logo.webp') }}" class="player-photo" alt="Golden State Warriors Logo">
+        {% elif featured_player.Tm == "HOU" %}
+          <img src="{{ url_for('static', filename='logos/houston_rockets_logo.webp') }}" class="player-photo" alt="Houston Rockets Logo">
+        {% elif featured_player.Tm == "IND" %}
+          <img src="{{ url_for('static', filename='logos/indiana_pacers_logo.webp') }}" class="player-photo" alt="Indiana Pacers Logo">
+        {% elif featured_player.Tm == "LAC" %}
+          <img src="{{ url_for('static', filename='logos/los_angeles_clippers_logo.webp') }}" class="player-photo" alt="Los Angeles Clippers Logo">
+        {% elif featured_player.Tm == "LAL" %}
+          <img src="{{ url_for('static', filename='logos/los_angeles_lakers_logo.webp') }}" class="player-photo" alt="Los Angeles Lakers Logo">
+        {% elif featured_player.Tm == "MEM" %}
+          <img src="{{ url_for('static', filename='logos/memphis_grizzlies_logo.webp') }}" class="player-photo" alt="Memphis Grizzlies Logo">
+        {% elif featured_player.Tm == "MIA" %}
+          <img src="{{ url_for('static', filename='logos/miami_heat_logo.webp') }}" class="player-photo" alt="Miami Heat Logo">
+        {% elif featured_player.Tm == "MIL" %}
+          <img src="{{ url_for('static', filename='logos/milwaukee_bucks_logo.webp') }}" class="player-photo" alt="Milwaukee Bucks Logo">
+        {% elif featured_player.Tm == "MIN" %}
+          <img src="{{ url_for('static', filename='logos/minnesota_timberwolves_logo.webp') }}" class="player-photo" alt="Minnesota Timberwolves Logo">
+        {% elif featured_player.Tm == "NOP" %}
+          <img src="{{ url_for('static', filename='logos/new_orleans_pelicans_logo.webp') }}" class="player-photo" alt="New Orleans Pelicans Logo">
+        {% elif featured_player.Tm == "NYK" %}
+          <img src="{{ url_for('static', filename='logos/new_york_knicks_logo.webp') }}" class="player-photo" alt="New York Knicks Logo">
+        {% elif featured_player.Tm == "OKC" %}
+          <img src="{{ url_for('static', filename='logos/oklahoma_city_thunder_logo.webp') }}" class="player-photo" alt="Oklahoma City Thunder Logo">
+        {% elif featured_player.Tm == "ORL" %}
+          <img src="{{ url_for('static', filename='logos/orlando_magic_logo.webp') }}" class="player-photo" alt="Orlando Magic Logo">
+        {% elif featured_player.Tm == "PHI" %}
+          <img src="{{ url_for('static', filename='logos/philadelphia_76ers_logo.webp') }}" class="player-photo" alt="Philadelphia 76ers Logo">
+        {% elif featured_player.Tm == "PHO" %}
+          <img src="{{ url_for('static', filename='logos/phoenix_suns_logo.webp') }}" class="player-photo" alt="Phoenix Suns Logo">
+        {% elif featured_player.Tm == "POR" %}
+          <img src="{{ url_for('static', filename='logos/portland_trail_blazers_logo.webp') }}" class="player-photo" alt="Portland Trail Blazers Logo">
+        {% elif featured_player.Tm == "SAC" %}
+          <img src="{{ url_for('static', filename='logos/sacramento_kings_logo.webp') }}" class="player-photo" alt="Sacramento Kings Logo">
+        {% elif featured_player.Tm == "SAS" %}
+          <img src="{{ url_for('static', filename='logos/san_antonio_spurs_logo.webp') }}" class="player-photo" alt="San Antonio Spurs Logo">
+        {% elif featured_player.Tm == "TOR" %}
+          <img src="{{ url_for('static', filename='logos/toronto_raptors_logo.webp') }}" class="player-photo" alt="Toronto Raptors Logo">
+        {% elif featured_player.Tm == "UTA" %}
+          <img src="{{ url_for('static', filename='logos/utah_jazz_logo.webp') }}" class="player-photo" alt="Utah Jazz Logo">
+        {% elif featured_player.Tm == "WAS" %}
+          <img src="{{ url_for('static', filename='logos/washington_wizards_logo.webp') }}" class="player-photo" alt="Washington Wizards Logo">
+        {% else %}
+          <div class="placeholder-image player-photo" role="img">
+            <span>{{ featured_player.Player if featured_player else 'No player data' }}</span>
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+
+
+    <div class="season-select">
+      <form method="get" action="/">
+        {% if searched_player %}
+        <input type="hidden" name="name" value="{{ searched_player }}">
+        {% endif %}
+        <label for="season-selector">Season:</label>
+        <select id="season-selector" name="season" onchange="this.form.submit()" aria-describedby="season-help">
+          <option value="2023-2024" {{ 'selected' if current_season == '2023-2024' else '' }}>2023-2024</option>
+          <option value="2022-2023" {{ 'selected' if current_season == '2022-2023' else '' }}>2022-2023</option>
+          <option value="2021-2022" {{ 'selected' if current_season == '2021-2022' else '' }}>2021-2022</option>
+        </select>
+        <span id="season-help" class="sr-only">Select a season to view statistics</span>
+      </form>
+    </div>
+
+    <div class="player-info">
+      <div class="info-box name-box">
+        <h3>{{ featured_player.Player if featured_player else 'No player data' }}</h3>
+      </div>
+
+      {% if featured_player %}
+      <div class="info-box stats-box">
+        <p><strong>Position:</strong> <span class="position-abbr">{{ featured_player.Pos }}</span></p>
+        <p><strong>Team:</strong> <span class="team-abbr">{{ featured_player.Tm }}</span></p>
+        <p><strong>Games Played:</strong> {{ featured_player.G }}</p>
+        <p><strong>Points:</strong> {{ featured_player.PTS }}</p>
+        <p><strong>Assists:</strong> {{ featured_player.AST }}</p>
+        <p><strong>Rebounds:</strong> {{ featured_player.TRB }}</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+</main>
+<script src="{{ url_for('static', filename='navigation.js') }}"></script>
+</body>
+</html>

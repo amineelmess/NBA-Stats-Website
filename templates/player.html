@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ player.name }} - Stats - NBA STATS</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='datastyle.css') }}">
+</head>
+<body>
+<header>
+<h1>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Basketball.png" alt="Basketball Logo">
+  <span>NBA STATS WEBSITE</span>
+  <nav>
+    <ul>
+      <li><a href="{{ url_for('homepage') }}">Home</a></li>
+      <li><a href="{{ url_for('top_players_page') }}">Top Players</a></li>
+      <li><a href="{{ url_for('about_page') }}">About</a></li>
+    </ul>
+  </nav>
+</h1>
+</header>
+
+<main>
+<div class="player-detail">
+  <h2>{{ player.name }}</h2>
+  <table class="simple" role="table" aria-label="Player statistics for {{ player.name }}">
+    <thead>
+    <tr>
+      <th scope="col">Position</th>
+      <th scope="col">Team</th>
+      <th scope="col">Games Played</th>
+      <th scope="col">Points</th>
+      <th scope="col">Assists</th>
+      <th scope="col">Rebounds</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>{{player.position}}</td>
+      <td>{{player.team}}</td>
+      <td>{{player.games_played}}</td>
+      <td>{{player.points}}</td>
+      <td>{{player.assists}}</td>
+      <td>{{player.rebounds}}</td> 
+    </tr>
+    </tbody>
+  </table>
+</div>
+</main>
+</body>
+</html>

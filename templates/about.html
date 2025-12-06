@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='datastyle.css') }}">
+    <title>About - NBA STATS</title>
+</head>
+<body>
+    <header>
+        <h1>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Basketball.png"
+                 alt="Basketball Logo">
+            <span>NBA STATS WEBSITE</span>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('homepage') }}">Home</a></li>
+                    <li><a href="{{ url_for('top_players_page') }}">Top Players</a></li>
+                    <li><a href="{{ url_for('teams_page') }}">Teams</a></li>
+                    <li><a href="{{ url_for('about_page') }}">About</a></li>
+                </ul>
+            </nav>
+            <form class="search-bar" action="/" method="get" role="search">
+                <label for="player-search">Player name:</label>
+                <div class="autocomplete-container">
+                    <input id="player-search" type="text" name="name" placeholder="Search player..." value="" required aria-describedby="search-help" autocomplete="off">
+                    <div id="autocomplete-dropdown" class="autocomplete-dropdown"></div>
+                </div>
+                <span id="search-help" class="sr-only">Enter a player's full name to search for their statistics</span>
+                <button type="submit">Search</button>
+            </form>
+        </h1>
+    </header>
+
+    <main>
+        <div class="main-section">
+            <h2>About NBA Stats Website</h2>
+
+            <div class="about-container">
+                <section class="about-section">
+                    <h3>What is this website?</h3>
+                    <p>
+                        NBA Stats Website is a comprehensive web application and command-line tool for accessing
+                        and exploring NBA player statistics. Our platform provides easy access to detailed player
+                        performance metrics, team rosters, and historical data across multiple seasons.
+                    </p>
+                </section>
+
+                <section class="about-section">
+                    <h3>Features</h3>
+                    <ul class="features-list">
+                        <strong>Player Search:</strong> Quickly search for any NBA player and view their detailed statistics<br>
+                        <strong>Team Rosters:</strong> Browse complete rosters for all 30 NBA teams with player positions and seasons<br>
+                        <strong>Top Players:</strong> View the highest scoring players for any season<br>
+                        <strong>Multi-Season Support:</strong> Compare statistics across 2021-2022, 2022-2023, and 2023-2024 seasons<br>
+                        <strong>Autocomplete Search:</strong> Smart search suggestions as you type<br>
+                        <strong>Responsive Design:</strong> Works seamlessly on desktop and mobile devices<br>
+                        <strong>Accessible Interface:</strong> Fully accessible with screen reader support<br>
+                    </ul>
+                </section>
+
+                <section class="about-section">
+                    <h3>How to Use</h3>
+                    <div class="instructions">
+                        <h4>Search for a Player:</h4>
+                        <p>Use the search bar at the top to look up any NBA player. The autocomplete feature will suggest player names as you type.</p>
+
+                        <h4>Browse Teams:</h4>
+                        <p>Click on the "Teams" link in the navigation to view all 30 NBA teams. Click any team box to see the complete roster with player positions and seasons played.</p>
+
+                        <h4>View Top Players:</h4>
+                        <p>Visit the "Top Players" page to see the highest scoring players for each season.</p>
+
+                        <h4>Select a Season:</h4>
+                        <p>Use the season dropdown to filter results across different NBA seasons (2021-2022, 2022-2023, 2023-2024).</p>
+                    </div>
+                </section>
+
+                <section class="about-section">
+                    <h3>Data</h3>
+                    <p>
+                        Our database contains comprehensive NBA statistics including:
+                    </p>
+                    <ul class="data-list">
+                        Player names, positions, and team assignments<br>
+                        Games played, points, assists, and rebounds<br>
+                        Historical data across multiple seasons<br>
+                        Team rosters and player movements<br>
+                    </ul>
+                </section>
+
+                <section class="about-section">
+                    <h3>Technologies</h3>
+                    <p>
+                        This website is built with:
+                    </p>
+                    <ul class="tech-list">
+                        <strong>Backend:</strong> Python, Flask, PostgreSQL<br>
+                        <strong>Frontend:</strong> HTML5, CSS3, JavaScript<br>
+                        <strong>Features:</strong> Autocomplete search, responsive design, accessibility support<br>
+                    </ul>
+                </section>
+
+                <section class="about-section">
+                    <h3>Accessibility</h3>
+                    <p>
+                        We're committed to making this website accessible to everyone:
+                    </p>
+                    <ul class="accessibility-list">
+                        Screen reader support with semantic HTML<br>
+                        Keyboard navigation support<br>
+                        High contrast mode support<br>
+                        Text resizing support (150-200%)<br>
+                        Responsive design for all screen sizes<br>
+                    </ul>
+                </section>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="{{ url_for('homepage') }}" class="back-button">
+                    ← Back to Home
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='autocomplete.js') }}"></script>
+    <script src="{{ url_for('static', filename='navigation.js') }}"></script>
+</body>
+</html>
