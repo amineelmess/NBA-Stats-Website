@@ -7,7 +7,7 @@ app = Flask(__name__)
 try:
     db = DataSource()
 except SystemExit:
-    # If database connection fails, the error message will be printed by DataSource
+# If database connection fails, the error message will be printed by DataSource
     db = None
 
 @app.route('/')
