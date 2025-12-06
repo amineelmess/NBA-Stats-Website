@@ -6,26 +6,6 @@ We aim to create an interactive NBA player statistics web app that allows users 
 - Learn to work as an efficient and collaborative development team.
 - Build a polished and useful final product we can potentially showcase in our portfolios.
 
-## Strengths of Team Members
-
-### Amine
-- Very organized and methodical
-- Good at task management and ensuring deadlines are met
-
-### Ngelek
-- Excellent at searching for answers, debugging problems, and exploring new tools
-- Great at researching documentation quickly
-
-### Jeremy
-- Has full stack experience
-- Strong in both frontend and backend development
-- Comfortable integrating databases with web applications
-
-## Capitalizing on Strengths
-- Amine will act as the team organizer, managing our task board, calendar, and sprint plans.
-- Ngelek will lead our troubleshooting, researching, and documentation tasks.
-- Jeremy will guide architectural decisions and take point on integrating the database with the frontend.
-- Responsibilities will rotate to ensure everyone grows and contributes across all areas.
 
 ## Team Expectations
 
