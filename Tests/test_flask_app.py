@@ -2,7 +2,7 @@ from flask_app import *
 import unittest
 
 class TestHomePage(unittest.TestCase):
-    """Integration tests for Flask homepage route with database"""
+"""Integration tests for Flask homepage route with database"""
 
     def setUp(self):
         """Set up Flask test client"""
