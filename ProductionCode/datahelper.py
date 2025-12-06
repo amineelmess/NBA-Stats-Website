@@ -59,7 +59,6 @@ def get_team_players(team_name, data_file='Data/2023_2024.csv'):
     except Exception as e:
         print(f"Error reading file: {e}")
         return []
-
     return players
 
 def get_top_players(limit=10, data_file='Data/2023_2024.csv'):
